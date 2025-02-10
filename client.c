@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:26:38 by apieniak          #+#    #+#             */
-/*   Updated: 2025/02/10 16:38:30 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/02/10 22:02:26 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	bit_sender(int pid, int c)
 		if (c & (1 << bits))
 		{
 			kill(pid, SIGUSR1);
-			usleep(200);
+			usleep(420);
 		}
 		else
 		{
 			kill(pid, SIGUSR2);
-			usleep(200);
+			usleep(420);
 		}
 		bits++;
 	}
@@ -51,9 +51,15 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	int	server_pid;
-	
+	int	i;
+
 	server_pid = atoi(argv[1]);
-	kill(server_pid, SIGUSR1);
+	i = 0;
+	while (argv[2][i] != '\0')
+	{
+		bit_sender(server_pid, argv[2][i]);
+		i++;
+	}
 	printf("You have typed: [%s] to the server", argv[2]);
 	return (0);
 }

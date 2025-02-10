@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:18:18 by apieniak          #+#    #+#             */
-/*   Updated: 2025/02/08 17:18:40 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/02/10 22:06:11 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@
 
 
 void	decode_message(int sig)
+
 {
-	int 	bits;
+	static int	bit;
+	static int	character;
 
-	bits = 8;
-	while (bits > 0)
+	if (sig == SIGUSR1)
+		character = character | (1 << bit);
+	bit++;
+	if (bit == 8)
 	{
-
-		bits--;
+		printf("%c \n", character);
+		bit = 0;
+		character = 0;
 	}
 }
 void    welcome_message()
