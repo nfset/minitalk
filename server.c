@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:18:18 by apieniak          #+#    #+#             */
-/*   Updated: 2025/02/10 22:06:11 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:36:31 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
+#include "ft_printf/ft_printf.h"
 
 
 void	decode_message(int sig)
@@ -31,18 +32,22 @@ void	decode_message(int sig)
 		character = 0;
 	}
 }
-void    welcome_message()
+
+void	welcome_message(void)
 {
     printf(".-.   .-..-..-. .-..-. .---.  .--.  .-.   .-. .-. \n");
+
     printf("|  `.'  || ||  `| || |{_   _}/ {} \\ | |   | |/ /  \n");
+
     printf("| |\\ /| || || |\\  || |  | | /  /\\  \\| `--.| |\\ \\  \n");
-    printf("`-' ` `-'`-'`-' `-'`-'  `-' `-'  `-'`----'`-' `-' \n");
+
+	printf("`-' ` `-'`-'`-' `-'`-'  `-' `-'  `-'`----'`-' `-' \n");
 }
 
-	
+
 int	main(void)
 {
-	int server_pid;
+	int	server_pid;
 
 	server_pid = getpid();
 	welcome_message();

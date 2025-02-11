@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:26:38 by apieniak          #+#    #+#             */
-/*   Updated: 2025/02/10 22:02:26 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:15:08 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <signal.h>
+#include "ft_printf/ft_printf.h"
 
 void	bit_sender(int pid, int c)
 {
-	int bits;
+	int	bits;
 
 	bits = 0;
 	while (bits < 8)
@@ -38,6 +37,9 @@ void	bit_sender(int pid, int c)
 
 int	main(int argc, char **argv)
 {
+	int	server_pid;
+	int	i;
+
 	if (argc != 3)
 	{
 		printf("ERROR! Wrong amount of parameters. Closing Proccess!\n");
@@ -50,9 +52,6 @@ int	main(int argc, char **argv)
 		printf("It won't be shown on the server side!\n");
 		return (1);
 	}
-	int	server_pid;
-	int	i;
-
 	server_pid = atoi(argv[1]);
 	i = 0;
 	while (argv[2][i] != '\0')
