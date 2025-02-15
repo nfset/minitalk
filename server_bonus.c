@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:19:26 by apieniak          #+#    #+#             */
-/*   Updated: 2025/02/13 21:45:06 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:28:42 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,21 @@ void	my_putchar(int c)
 
 void	decode_message(int sig, siginfo_t *info, void *nothing)
 {
-	static int	bit;
-	static int	character;
-	pid_t		client_id;
+	static int				bit = 0;
+	static int				character = 0;
+	static int				client_id = 0;
 
-	client_id = info->si_pid;
 	(void)nothing;
+	client_id = info->si_pid;
 	if (sig == SIGUSR1)
 		character = character | (1 << bit);
 	bit++;
 	if (bit == 8)
-	{	
+	{
 		if (character == 0)
+		{
 			kill(client_id, SIGUSR2);
+		}
 		my_putchar(character);
 		bit = 0;
 		character = 0;
@@ -44,26 +46,21 @@ void	decode_message(int sig, siginfo_t *info, void *nothing)
 
 void	welcome_message(void)
 {
-    printf(".-.   .-..-..-. .-..-. .---.  .--.  .-.   .-. .-. \n");
-
-    printf("|  `.'  || ||  `| || |{_   _}/ {} \\ | |   | |/ /  \n");
-
-    printf("| |\\ /| || || |\\  || |  | | /  /\\  \\| `--.| |\\ \\  \n");
-
-	printf("`-' ` `-'`-'`-' `-'`-'  `-' `-'  `-'`----'`-' `-' \n");
+	ft_printf(".-.   .-..-..-. .-..-. .---.  .--.  .-.   .-. .-. \n");
+	ft_printf("|  `.'  || ||  `| || |{_   _}/ {} \\ | |   | |/ /  \n");
+	ft_printf("| |\\ /| || || |\\  || |  | | /  /\\  \\| `--.| |\\ \\  \n");
+	ft_printf("`-' ` `-'`-'`-' `-'`-'  `-' `-'  `-'`----'`-' `-' \n");
 }
 
 int	main(void)
 {
-    struct sigaction sig_act;
-	sig_act.sa_sigaction = &decode_message;
+	struct sigaction	sig_act;
+
+	sig_act.sa_sigaction = decode_message;
 	sig_act.sa_flags = SA_SIGINFO;
 	sig_act.sa_flags = sigemptyset(&sig_act.sa_mask);
-	int	server_pid;
-
-	server_pid = getpid();
 	welcome_message();
-	printf("Server process id is: %d\n", server_pid);
+	ft_printf("Server process id is: %d\n", getpid());
 	sigaction(SIGUSR1, &sig_act, NULL);
 	sigaction(SIGUSR2, &sig_act, NULL);
 	while (1)

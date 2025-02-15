@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:18:18 by apieniak          #+#    #+#             */
-/*   Updated: 2025/02/11 16:36:31 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:18:25 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <signal.h>
 #include "ft_printf/ft_printf.h"
-
 
 void	decode_message(int sig)
 
@@ -27,7 +26,7 @@ void	decode_message(int sig)
 	bit++;
 	if (bit == 8)
 	{
-		printf("%c \n", character);
+		ft_printf("%c \n", character);
 		bit = 0;
 		character = 0;
 	}
@@ -35,15 +34,11 @@ void	decode_message(int sig)
 
 void	welcome_message(void)
 {
-    printf(".-.   .-..-..-. .-..-. .---.  .--.  .-.   .-. .-. \n");
-
-    printf("|  `.'  || ||  `| || |{_   _}/ {} \\ | |   | |/ /  \n");
-
-    printf("| |\\ /| || || |\\  || |  | | /  /\\  \\| `--.| |\\ \\  \n");
-
-	printf("`-' ` `-'`-'`-' `-'`-'  `-' `-'  `-'`----'`-' `-' \n");
+	ft_printf(".-.   .-..-..-. .-..-. .---.  .--.  .-.   .-. .-. \n");
+	ft_printf("|  `.'  || ||  `| || |{_   _}/ {} \\ | |   | |/ /  \n");
+	ft_printf("| |\\ /| || || |\\  || |  | | /  /\\  \\| `--.| |\\ \\  \n");
+	ft_printf("`-' ` `-'`-'`-' `-'`-'  `-' `-'  `-'`----'`-' `-' \n");
 }
-
 
 int	main(void)
 {
@@ -51,7 +46,7 @@ int	main(void)
 
 	server_pid = getpid();
 	welcome_message();
-	printf("Server process id is: %d\n", server_pid);
+	ft_printf("Server process id is: %d\n", server_pid);
 	signal(SIGUSR1, decode_message);
 	signal(SIGUSR2, decode_message);
 	while (1)
