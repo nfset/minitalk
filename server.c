@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:18:18 by apieniak          #+#    #+#             */
-/*   Updated: 2025/02/15 19:18:25 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:34:29 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	decode_message(int sig)
 	bit++;
 	if (bit == 8)
 	{
-		ft_printf("%c \n", character);
+		ft_printf("%c", character);
 		bit = 0;
 		character = 0;
 	}

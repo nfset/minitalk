@@ -1,5 +1,5 @@
 # nazwa glowna + co wywoluje
-NAME = server client
+NAME = server client bonus
 BONUS_NAME = server_bonus client_bonus
 
 # opche kompilowanie + komenda na kasowanie
